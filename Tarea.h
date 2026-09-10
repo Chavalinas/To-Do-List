@@ -3,17 +3,25 @@
 
 using namespace std;
 
+/** 
+ * @file 
+ * @brief Funciones (métodos) disponibles de la clase Estudiante. Cada instancia u objeto de la clase
+ * Estudiante cuenta con cinco propiedades privadas (nombre, carrera, promedio, matrícula y número de 
+ * materias cursando). Sus métodos facilitan el visualizar la información general del estudiante. 
+ */
+
 class Tarea
 {
     private:
+        string titulo;
         string descripcion;
         string estado;
         string fecha;
+        int id;
 
     public:
-        Tarea(string descripcion, string estado, string fecha_creacion);
+        Tarea(string titulo, string descripcion, string estado, string fecha, int id);
 
-        void obtener_informacion();
         string obtener_descripcion();
         string obtener_estado();
         string obtener_fecha_creacion();
