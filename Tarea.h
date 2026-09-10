@@ -22,3 +22,4 @@ class Tarea
         void modificar_estado(string status);
         void modificar_fecha(string nueva_fecha);
 };
+
