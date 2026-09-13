@@ -17,7 +17,9 @@ class Tarea
         string descripcion;
         string estado;
         string fecha;
-        int id;
+        int id; // Al ser dinámico, cada tarea cuenta con un ID único.
+
+        static int sig_id; // Al ser estático, actúa como un contador para todas las tareas durante la ejecución del programa.
 
     public:
         Tarea(string titulo, string descripcion, string estado, string fecha, int id);

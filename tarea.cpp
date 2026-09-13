@@ -1,18 +1,32 @@
 #include <iostream>
 #include <windows.h>
+#include <cctype>
 #include "Tarea.h"
 
 using namespace std;
 
 /***********************************************************************/
 
-Tarea::Tarea(string titulo, string descripcion, string estado, string fecha, int id)
+Tarea::Tarea(string titulo, string desc, string estado, string fecha, int id)
 {
     this->titulo = titulo;
     this->descripcion = descripcion;
     this->estado = estado;
     this->fecha = fecha;
-    this->id = id;
+
+    if (estado == "pendiente" || estado == "en progreso" || estado == "completada")
+    {
+        this->estado = estado;
+    }
+    else
+    {
+        cout << "ERROR : Ha ingresado un estado inválido.\n";
+        cout << "El estado por defecto de su tarea es ahora : PENDIENTE.\n";
+        this->estado = "pendiente";
+    }
+
+    this->id = sig_id;
+    sig_id++;
 }
 
 /***********************************************************************/
@@ -69,6 +83,18 @@ void Tarea::modificar_descripcion(string nueva_desc)
 
 void Tarea::modificar_estado(string nuevo_estado)
 {
-    estado = nuevo_estado;
-    cout << "--> El estado de la tarea ha sido modificado con éxito.\n";
+    for (int i = 0; i < nuevo_estado.length(); i++)
+    {
+        nuevo_estado[i] = tolower(nuevo_estado[i]);
+    }
+
+    if (nuevo_estado == "pendiente" || nuevo_estado == "en progreso" || nuevo_estado == "completada")
+    {
+        estado = nuevo_estado;
+        cout << "--> El estado de la tarea ha sido modificado con éxito.\n";
+    }
+    else
+    {
+        cout << "ERROR : Ha ingresado un estado inválido. Intente de nuevo.\n";
+    }
 }
