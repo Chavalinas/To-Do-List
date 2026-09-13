@@ -24,32 +24,29 @@ Tarea::Tarea(string titulo, string descripcion, string estado, string fecha, int
  * materias cursando). Sus métodos facilitan el visualizar la información general del estudiante. 
  */
 
-void obtener_informacion()
-{
 
+string Tarea::obtener_descripcion()
+{
+    return descripcion;
 }
-string obtener_descripcion()
+string Tarea::obtener_estado()
 {
-
+    return estado;
 }
-string obtener_estado()
+string Tarea::obtener_fecha()
 {
-
-}
-string obtener_fecha_creacion()
-{
-
+    return fecha;
 }
 
-void modificar_descripcion(string desc)
+void Tarea::modificar_descripcion(string nueva_desc)
 {
-
+    descripcion = nueva_desc;
 }
-void modificar_estado(string status)
+void Tarea::modificar_estado(string nuevo_estado)
 {
-
+    estado = nuevo_estado;
 }
-void modificar_fecha(string nueva_fecha)
+void Tarea::modificar_fecha(string nueva_fecha)
 {
-    
+    fecha = nueva_fecha;
 }

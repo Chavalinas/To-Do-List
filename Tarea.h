@@ -24,10 +24,10 @@ class Tarea
 
         string obtener_descripcion();
         string obtener_estado();
-        string obtener_fecha_creacion();
+        string obtener_fecha();
 
-        void modificar_descripcion(string desc);
-        void modificar_estado(string status);
+        void modificar_descripcion(string nueva_desc);
+        void modificar_estado(string nuevo_estado);
         void modificar_fecha(string nueva_fecha);
 };
 
