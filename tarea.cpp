@@ -19,34 +19,56 @@ Tarea::Tarea(string titulo, string descripcion, string estado, string fecha, int
 
 /** 
  * @file 
- * @brief Funciones (métodos) disponibles de la clase Estudiante. Cada instancia u objeto de la clase
- * Estudiante cuenta con cinco propiedades privadas (nombre, carrera, promedio, matrícula y número de 
- * materias cursando). Sus métodos facilitan el visualizar la información general del estudiante. 
+ * @brief Métodos para obtener los valores almacenados en las propiedades de la clase Tarea.
  */
 
+
+string Tarea::obtener_titulo()
+{
+    return titulo;
+}
 
 string Tarea::obtener_descripcion()
 {
     return descripcion;
 }
+
 string Tarea::obtener_estado()
 {
     return estado;
 }
+
 string Tarea::obtener_fecha()
 {
     return fecha;
 }
 
+int Tarea::obtener_id()
+{
+    return id;
+}
+
+/***********************************************************************/
+
+/** 
+ * @file 
+ * @brief Métodos para modificar los valores almacenados en las propiedades de la clase Tarea.
+ */
+
+void Tarea::modificar_titulo(string nuevo_titulo)
+{
+    titulo = nuevo_titulo;
+    cout << "--> El título de la tarea ha sido modificado con éxito.\n";
+}
+
 void Tarea::modificar_descripcion(string nueva_desc)
 {
     descripcion = nueva_desc;
+    cout << "--> La descripción de la tarea ha sido modificada con éxito.\n";
 }
+
 void Tarea::modificar_estado(string nuevo_estado)
 {
     estado = nuevo_estado;
-}
-void Tarea::modificar_fecha(string nueva_fecha)
-{
-    fecha = nueva_fecha;
+    cout << "--> El estado de la tarea ha sido modificado con éxito.\n";
 }
