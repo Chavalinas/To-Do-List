@@ -1,24 +1,52 @@
 #pragma once
+
 #include <vector>
+#include <string>
 #include "Tarea.h"
+
+using namespace std;
 
 /**
  * @file
- * @brief Clase ListaTareas: administra una coleccion de objetos Tarea en memoria.
+ * @brief Clase ListaTareas que administra la colección de tareas.
  */
 
 class ListaTareas
 {
-    private:
-        vector<Tarea> tareas; // Coleccion de objetos Tarea
+private:
 
-    public:
-        void agregar_tarea(const Tarea& tarea);
-        bool eliminar_tarea(int id);   // Regresa true si la encontro y la borro
-        bool existe_tarea(int id);
-        int cantidad();
-        void mostrar_resumen();        // Muestra ID y titulo de cada tarea
+    vector<Tarea> tareas;
+
+public:
+
+    // ----------- ARY 
+
+    // Añade tareas
+    void agregar_tarea(const Tarea& tarea);
+
+    // Elimina una tarea por ID.
+    bool eliminar_tarea(int id);
+
+    // Verifica si existe una tarea por ID (validacion)
+    bool existe_tarea(int id);
+
+    // Devuelve la cantidad de tareas
+    int cantidad();
+
+
+    // ---------------- PAULINA 
+
+    void listarTareas();
+
+    void mostrar_resumen();
+
+
+    // (del archivo "CambiarEstado.cpp") 
+
+    // Conecta el cambio de estado con ListaTareas
+    bool cambiar_estado(int id, string nuevo_estado);
 };
 
-// Opcion del menu: pide el ID, valida, confirma y elimina.
+// Controla el proceso completo de eliminación.
 void opcion_eliminar(ListaTareas& lista);
+
