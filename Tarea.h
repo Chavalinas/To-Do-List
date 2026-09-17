@@ -33,6 +33,8 @@ class Tarea
         void modificar_titulo(string nuevo_titulo);
         void modificar_descripcion(string nueva_desc);
         void modificar_estado(string nuevo_estado);
+
         void modificar_id(int nuevo_id);
+        static void actualizar_siguiente_id(int nuevo_id);
 };
 
