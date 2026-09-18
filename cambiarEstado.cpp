@@ -12,7 +12,6 @@ string solicitarNuevoEstado()
 {
     cout << "Selecciona el nuevo estado:\n";
     cout << "1. Pendiente\n";
-    cout << "2. En progreso\n";
     cout << "3. Completada\n";
 
     // Validaciones (del archivo validaciones.h)
