@@ -61,7 +61,7 @@ void actualizarEstadoTarea(ListaTareas& lista)
         return;
     }
 
-	// (del archivo "CambiarEstado.h")
+	// del archivo "CambiarEstado.h"
     string nuevoEstado = solicitarNuevoEstado();
 
     if (lista.cambiar_estado( 
