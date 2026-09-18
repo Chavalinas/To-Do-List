@@ -98,3 +98,13 @@ void Tarea::modificar_estado(string nuevo_estado)
         cout << "ERROR : Ha ingresado un estado inválido. Intente de nuevo.\n";
     }
 }
+
+void Tarea::modificar_id(int nuevo_id)
+{
+    id = nuevo_id;
+}
+
+void Tarea::actualizar_siguiente_id(int nuevo_id)
+{
+    sig_id = nuevo_id;
+}
