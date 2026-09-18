@@ -12,7 +12,6 @@ string solicitarNuevoEstado()
 {
     cout << "Selecciona el nuevo estado:\n";
     cout << "1. Pendiente\n";
-    cout << "2. En progreso\n";
     cout << "3. Completada\n";
 
     // Validaciones (del archivo validaciones.h)
@@ -61,7 +60,7 @@ void actualizarEstadoTarea(ListaTareas& lista)
         return;
     }
 
-	// (del archivo "CambiarEstado.h")
+	// del archivo "CambiarEstado.h"
     string nuevoEstado = solicitarNuevoEstado();
 
     if (lista.cambiar_estado( 
