@@ -36,20 +36,7 @@ Tarea::Tarea(string titulo, string desc, string estado,int id)
     this->titulo = titulo;
     this->descripcion = desc;
     this->fecha = obtener_fecha_actual();
-
-    if (estado == "pendiente" ||
-        estado == "en progreso" ||
-        estado == "completada")
-    {
-        this->estado = estado;
-    }
-    else
-    {
-        cout << "ERROR: Ha ingresado un estado inválido.\n";
-        cout << "El estado por defecto de su tarea es ahora: PENDIENTE.\n";
-
-        this->estado = "pendiente";
-    }
+    this->estado = "pendiente";
 
     // Si no se proporciona un ID, se genera automáticamente
     if (id == 0)
@@ -97,16 +84,12 @@ int Tarea::obtener_id()
 void Tarea::modificar_titulo(string nuevo_titulo)
 {
     titulo = nuevo_titulo;
-
-    cout << "--> El título de la tarea ha sido modificado con éxito.\n";
 }
 
 
 void Tarea::modificar_descripcion(string nueva_desc)
 {
     descripcion = nueva_desc;
-
-    cout << "--> La descripción de la tarea ha sido modificada con éxito.\n";
 }
 
 
@@ -119,18 +102,7 @@ void Tarea::modificar_estado(string nuevo_estado)
             );
     }
 
-    if (nuevo_estado == "pendiente" ||
-        nuevo_estado == "en progreso" ||
-        nuevo_estado == "completada")
-    {
-        estado = nuevo_estado;
-
-        cout << "--> El estado de la tarea ha sido modificado con éxito.\n";
-    }
-    else
-    {
-        cout << "ERROR: Ha ingresado un estado inválido. Intente de nuevo.\n";
-    }
+    estado = nuevo_estado;
 }
 
 
