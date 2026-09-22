@@ -54,28 +54,7 @@ void agregarTareaUI(ListaTareas& lista)
         "Ingresa la fecha de la tarea: "
     );
 
-    cout << "\nSelecciona el estado inicial:\n";
-    cout << "1. Pendiente\n";
-    cout << "2. En progreso\n";
-    cout << "3. Completada\n";
-
-    int opcionEstado = leerEntero("Opcion: ", 1, 3);
-    string estado;
-
-    switch (opcionEstado)
-    {
-    case 1:
-        estado = "pendiente";
-        break;
-
-    case 2:
-        estado = "en progreso";
-        break;
-
-    case 3:
-        estado = "completada";
-        break;
-    }
+    string estado = "pendiente";
 
     Tarea nuevaTarea(
         titulo,
