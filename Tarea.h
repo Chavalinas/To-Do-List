@@ -3,38 +3,32 @@
 
 using namespace std;
 
-/** 
- * @file 
- * @brief Funciones (métodos) disponibles de la clase Tarea. Cada instancia u objeto de la clase
- * Tarea cuenta con cinco propiedades privadas (título, descripción, estado, fecha e ID). 
- * Sus métodos facilitan el visualizar la información de la tarea. 
- */
-
 class Tarea
 {
-    private:
-        string titulo;
-        string descripcion;
-        string estado;
-        string fecha;
-        int id; // Al ser dinámico, cada tarea cuenta con un ID único.
+private:
+    string titulo;
+    string descripcion;
+    string estado;
+    string fecha;
+    int id;
+    static int sig_id;
 
-        static int sig_id; // Al ser estático, actúa como un contador para todas las tareas durante la ejecución del programa.
+    static string obtener_fecha_actual();
 
-    public:
-        Tarea(string titulo, string descripcion, string estado, string fecha, int id);
+public:
+    Tarea(string titulo, string descripcion, string estado, int id);
 
-        string obtener_titulo();
-        string obtener_descripcion();
-        string obtener_estado();
-        string obtener_fecha();
-        int obtener_id();
+    string obtener_titulo();
+    string obtener_descripcion();
+    string obtener_estado();
+    string obtener_fecha();
+    int obtener_id();
 
-        void modificar_titulo(string nuevo_titulo);
-        void modificar_descripcion(string nueva_desc);
-        void modificar_estado(string nuevo_estado);
+    void modificar_titulo(string nuevo_titulo);
+    void modificar_descripcion(string nueva_desc);
+    void modificar_estado(string nuevo_estado);
 
-        void modificar_id(int nuevo_id);
-        static void actualizar_siguiente_id(int nuevo_id);
+   // (del archivo "ListaTareas.cpp")
+    void modificar_id(int nuevo_id);
+    static void actualizar_siguiente_id(int nuevo_id);
 };
-

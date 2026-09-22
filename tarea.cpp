@@ -1,40 +1,67 @@
 #include <iostream>
-#include <windows.h>
 #include <cctype>
+#include <ctime> 
+
 #include "Tarea.h"
 
 using namespace std;
 
-/***********************************************************************/
 
-Tarea::Tarea(string titulo, string desc, string estado, string fecha, int id)
+// Se inicializa el contador de IDs en 1
+int Tarea::sig_id = 1;
+
+// Constructor para la fecha actual 
+string Tarea::obtener_fecha_actual()
+{
+    time_t tiempo_actual = time(nullptr);
+    tm tiempo_local;
+
+    localtime_s(&tiempo_local, &tiempo_actual);
+
+    char fecha_actual[11];
+
+    strftime(
+        fecha_actual,
+        sizeof(fecha_actual),
+        "%d/%m/%Y",
+        &tiempo_local
+    );
+
+    return string(fecha_actual);
+} 
+
+
+Tarea::Tarea(string titulo, string desc, string estado,int id)
 {
     this->titulo = titulo;
-    this->descripcion = descripcion;
-    this->estado = estado;
-    this->fecha = fecha;
+    this->descripcion = desc;
+    this->fecha = obtener_fecha_actual();
 
-    if (estado == "pendiente" || estado == "en progreso" || estado == "completada")
+    if (estado == "pendiente" ||
+        estado == "en progreso" ||
+        estado == "completada")
     {
         this->estado = estado;
     }
     else
     {
-        cout << "ERROR : Ha ingresado un estado inválido.\n";
-        cout << "El estado por defecto de su tarea es ahora : PENDIENTE.\n";
+        cout << "ERROR: Ha ingresado un estado inválido.\n";
+        cout << "El estado por defecto de su tarea es ahora: PENDIENTE.\n";
+
         this->estado = "pendiente";
     }
 
-    this->id = sig_id;
-    sig_id++;
+    // Si no se proporciona un ID, se genera automáticamente
+    if (id == 0)
+    {
+        this->id = sig_id;
+        sig_id++;
+    }
+    else
+    {
+        this->id = id;
+    }
 }
-
-/***********************************************************************/
-
-/** 
- * @file 
- * @brief Métodos para obtener los valores almacenados en las propiedades de la clase Tarea.
- */
 
 
 string Tarea::obtener_titulo()
@@ -42,67 +69,77 @@ string Tarea::obtener_titulo()
     return titulo;
 }
 
+
 string Tarea::obtener_descripcion()
 {
     return descripcion;
 }
+
 
 string Tarea::obtener_estado()
 {
     return estado;
 }
 
+
 string Tarea::obtener_fecha()
 {
     return fecha;
 }
+
 
 int Tarea::obtener_id()
 {
     return id;
 }
 
-/***********************************************************************/
-
-/** 
- * @file 
- * @brief Métodos para modificar los valores almacenados en las propiedades de la clase Tarea.
- */
 
 void Tarea::modificar_titulo(string nuevo_titulo)
 {
     titulo = nuevo_titulo;
+
     cout << "--> El título de la tarea ha sido modificado con éxito.\n";
 }
+
 
 void Tarea::modificar_descripcion(string nueva_desc)
 {
     descripcion = nueva_desc;
+
     cout << "--> La descripción de la tarea ha sido modificada con éxito.\n";
 }
+
 
 void Tarea::modificar_estado(string nuevo_estado)
 {
     for (int i = 0; i < nuevo_estado.length(); i++)
     {
-        nuevo_estado[i] = tolower(nuevo_estado[i]);
+        nuevo_estado[i] = static_cast<char>(
+            tolower(static_cast<unsigned char>(nuevo_estado[i]))
+            );
     }
 
-    if (nuevo_estado == "pendiente" || nuevo_estado == "en progreso" || nuevo_estado == "completada")
+    if (nuevo_estado == "pendiente" ||
+        nuevo_estado == "en progreso" ||
+        nuevo_estado == "completada")
     {
         estado = nuevo_estado;
+
         cout << "--> El estado de la tarea ha sido modificado con éxito.\n";
     }
     else
     {
-        cout << "ERROR : Ha ingresado un estado inválido. Intente de nuevo.\n";
+        cout << "ERROR: Ha ingresado un estado inválido. Intente de nuevo.\n";
     }
 }
 
+
+//renumera los id en caso de que se elimine uno 
 void Tarea::modificar_id(int nuevo_id)
 {
     id = nuevo_id;
 }
+
 
 void Tarea::actualizar_siguiente_id(int nuevo_id)
 {
