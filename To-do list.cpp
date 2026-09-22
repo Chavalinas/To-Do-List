@@ -12,13 +12,6 @@
 
 using namespace std;
 
-
-void listarTareasUI(ListaTareas& lista)
-{
-    lista.listarTareas();
-}
-
-
 int main()
 {
 

@@ -82,38 +82,6 @@ void ListaTareas::mostrar_resumen()
 //cuenta la cantidad de tareas para mostrar el resumen de todas las tareas y para saber si hay tareas antes de cambiar o eliminar alguna tarea
 }
 
-void opcion_eliminar(ListaTareas& lista)
-{
-
-    if (lista.cantidad() == 0)
-    {
-        cout << "\nNo hay tareas para eliminar.\n";
-        return;
-    }
-
-    cout << "\n========== ELIMINAR TAREA ==========\n";
-
-    lista.mostrar_resumen();
-
-    int id = leerEntero(
-        "ID de la tarea a eliminar: ", 1,1000000  ); 
-
-    if (!lista.existe_tarea(id))
-    {
-        cout << "No existe una tarea con ese ID.\n";
-        return;
-    }
-    if (confirmar("¿Seguro que quieres eliminarla? (s/n): "))
-    {
-        lista.eliminar_tarea(id);
-
-        cout << "Tarea eliminada correctamente.\n";
-    }
-    else
-    {
-        cout << "Operación cancelada.\n";
-    }
-}
 
   // ------------------- PAULINA
 
