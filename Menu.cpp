@@ -1,5 +1,8 @@
-#include <iostream>
+#include "mensajes.h"
+
+#include <stdexcept>
 #include <string>
+#include <exception>
 
 #include "menu.h"
 #include "ListaTareas.h"
@@ -13,46 +16,81 @@ using namespace std;
 
 void Menu::mostrarMenu()
 {
-    cout << "\n========== TO-DO LIST ==========\n";
-    cout << "1. Añadir tarea\n";
-    cout << "2. Listar tareas\n";
-    cout << "3. Cambiar estado\n";
-    cout << "4. Eliminar tarea\n";
-    cout << "5. Salir\n";
-    cout << "================================\n";
+    mensajes::showmessage("\n========== TO-DO LIST ==========\n");
+    mensajes::showmessage("1. Añadir tarea\n");
+    mensajes::showmessage("2. Listar tareas\n");
+    mensajes::showmessage("3. Cambiar estado\n");
+    mensajes::showmessage("4. Eliminar tarea\n");
+    mensajes::showmessage("5. Salir\n");
+    mensajes::showmessage("================================\n");
 }
 
 
 int Menu::pedirSeleccion()
 {
-    int seleccion;
-
-    cout << "Selecciona una opcion: ";
-
-    cin >> seleccion;
-
-    return seleccion;
+    while (true)
+    {
+        try
+        {
+            return leerEntero(
+                "Selecciona una opcion: ",
+                1,
+                5
+            );
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(e.what());
+        }
+    }
 }
 
-// ============ FUNCIONES ================ 
 
-//AÑADIR TAREA
+// ==================== AÑADIR TAREA ====================
 
 void agregarTareaUI(ListaTareas& lista)
 {
-    cout << "\n========== AÑADIR TAREA ==========\n";
-
-    string titulo = leerTextoNoVacio(
-        "Ingresa el titulo de la tarea: "
+    mensajes::showmessage(
+        "\n========== AÑADIR TAREA ==========\n"
     );
 
-    string descripcion = leerTextoNoVacio(
-        "Ingresa la descripcion de la tarea: "
-    );
+    string titulo;
 
-    string fecha = leerTextoNoVacio(
-        "Ingresa la fecha de la tarea: "
-    );
+    while (true)
+    {
+        try
+        {
+            titulo = leerTextoNoVacio(
+                "Ingresa el titulo de la tarea: "
+            );
+
+            break;
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(e.what());
+        }
+    }
+
+
+    string descripcion;
+
+    while (true)
+    {
+        try
+        {
+            descripcion = leerTextoNoVacio(
+                "Ingresa la descripcion de la tarea: "
+            );
+
+            break;
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(e.what());
+        }
+    }
+
 
     string estado = "pendiente";
 
@@ -60,137 +98,271 @@ void agregarTareaUI(ListaTareas& lista)
         titulo,
         descripcion,
         estado,
-        fecha,
         0
     );
 
     lista.agregar_tarea(nuevaTarea);
 
-    cout << "\nTarea añadida correctamente.\n";
+    mensajes::showmessage(
+        "\nTarea añadida correctamente.\n"
+    );
 
-    cout << "ID asignado: "
-        << nuevaTarea.obtener_id()
-        << "\n";
+    mensajes::showmessage(
+        "ID asignado: "
+        + to_string(nuevaTarea.obtener_id())
+        + "\n"
+    );
 }
 
 
-//LISTAR TAREAS 
+// ==================== LISTAR TAREAS ====================
 
 void listarTareasUI(ListaTareas& lista)
 {
-    lista.listarTareas();
+    try
+    {
+        mensajes::showmessage(
+            lista.listarTareas()
+        );
+    }
+    catch (const exception& e)
+    {
+        mensajes::showmessage(
+            string("\n") + e.what() + "\n"
+        );
+    }
 }
 
 
-// CAMBIAR ESTADO
+// ==================== CAMBIAR ESTADO ====================
 
 string solicitarNuevoEstado()
 {
-    cout << "Selecciona el nuevo estado:\n";
-    cout << "1. Pendiente\n";
-    cout << "2. En progreso\n";
-    cout << "3. Completada\n";
-
-    int opcion = leerEntero(
-        "Opcion: ",
-        1,
-        3
+    mensajes::showmessage(
+        "\nSelecciona el nuevo estado:\n"
     );
 
-    switch (opcion)
+    mensajes::showmessage("1. Pendiente\n");
+    mensajes::showmessage("2. En progreso\n");
+    mensajes::showmessage("3. Completada\n");
+
+
+    while (true)
     {
-    case 1:
-        return "pendiente";
+        try
+        {
+            int opcion = leerEntero(
+                "Opcion: ",
+                1,
+                3
+            );
 
-    case 2:
-        return "en progreso";
+            switch (opcion)
+            {
+            case 1:
+                return "pendiente";
 
-    case 3:
-        return "completada";
+            case 2:
+                return "en progreso";
 
-    default:
-        return "";
+            case 3:
+                return "completada";
+            }
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(e.what());
+        }
     }
 }
 
 
 void actualizarEstadoTarea(ListaTareas& lista)
 {
-    lista.listarTareas();
-
     if (lista.cantidad() == 0)
     {
+        mensajes::showmessage(
+            "\nNo hay tareas registradas en la lista.\n"
+        );
+
         return;
     }
 
-    int idTarea = leerEntero(
-        "Ingresa el ID de la tarea a modificar: ",
-        1,
-        1000000
-    );
 
-    if (!lista.existe_tarea(idTarea))
+    try
     {
-        cout << "Error: no existe ninguna tarea con el ID "
-            << idTarea
-            << ".\n";
+        mensajes::showmessage(
+            lista.listarTareas()
+        );
+    }
+    catch (const exception& e)
+    {
+        mensajes::showmessage(
+            string("\n") + e.what() + "\n"
+        );
 
         return;
     }
+
+
+    int idTarea;
+
+    while (true)
+    {
+        try
+        {
+            idTarea = leerEntero(
+                "Ingresa el ID de la tarea a modificar: ",
+                1,
+                1000000
+            );
+
+            if (!lista.existe_tarea(idTarea))
+            {
+                throw invalid_argument(
+                    "Error: no existe ninguna tarea con ese ID.\n"
+                );
+            }
+
+            break;
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(e.what());
+        }
+    }
+
 
     string nuevoEstado = solicitarNuevoEstado();
 
-    if (lista.cambiar_estado(
-        idTarea,
-        nuevoEstado
-    ))
+
+    try
     {
-        cout << "Tarea ["
-            << idTarea
-            << "] actualizada correctamente a '"
-            << nuevoEstado
-            << "'.\n";
+        lista.cambiar_estado(
+            idTarea,
+            nuevoEstado
+        );
+
+        mensajes::showmessage(
+            "Tarea ["
+            + to_string(idTarea)
+            + "] actualizada correctamente a '"
+            + nuevoEstado
+            + "'.\n"
+        );
     }
-    else
+    catch (const exception& e)
     {
-        cout << "Error: no se pudo actualizar el estado.\n";
+        mensajes::showmessage(
+            string("\n") + e.what() + "\n"
+        );
     }
 }
 
-//ELIMINAR TAREA 
+
+// ==================== ELIMINAR TAREA ====================
 
 void opcion_eliminar(ListaTareas& lista)
 {
     if (lista.cantidad() == 0)
     {
-        cout << "\nNo hay tareas para eliminar.\n";
+        mensajes::showmessage(
+            "\nNo hay tareas para eliminar.\n"
+        );
+
         return;
     }
 
-    cout << "\n========== ELIMINAR TAREA ==========\n";
 
-    lista.mostrar_resumen();
-
-    int id = leerEntero(
-        "ID de la tarea a eliminar: ",
-        1,
-        1000000
+    mensajes::showmessage(
+        "\n========== ELIMINAR TAREA ==========\n"
     );
 
-    if (!lista.existe_tarea(id))
+
+    try
     {
-        cout << "No existe una tarea con ese ID.\n";
+        mensajes::showmessage(
+            lista.mostrar_resumen()
+        );
+    }
+    catch (const exception& e)
+    {
+        mensajes::showmessage(
+            string("\n") + e.what() + "\n"
+        );
+
         return;
     }
 
-    if (confirmar("¿Seguro que quieres eliminarla? (s/n): "))
-    {
-        lista.eliminar_tarea(id);
 
-        cout << "Tarea eliminada correctamente.\n";
+    int id;
+
+    while (true)
+    {
+        try
+        {
+            id = leerEntero(
+                "ID de la tarea a eliminar: ",
+                1,
+                1000000
+            );
+
+            if (!lista.existe_tarea(id))
+            {
+                throw invalid_argument(
+                    "Error: no existe una tarea con ese ID.\n"
+                );
+            }
+
+            break;
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(e.what());
+        }
+    }
+
+
+    bool eliminar = false;
+
+    while (true)
+    {
+        try
+        {
+            eliminar = confirmar(
+                "Seguro que quieres eliminarla? (s/n): "
+            );
+
+            break;
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(e.what());
+        }
+    }
+
+
+    if (eliminar)
+    {
+        try
+        {
+            lista.eliminar_tarea(id);
+
+            mensajes::showmessage(
+                "Tarea eliminada correctamente.\n"
+            );
+        }
+        catch (const exception& e)
+        {
+            mensajes::showmessage(
+                string("\n") + e.what() + "\n"
+            );
+        }
     }
     else
     {
-        cout << "Operación cancelada.\n";
+        mensajes::showmessage(
+            "Operacion cancelada.\n"
+        );
     }
 }

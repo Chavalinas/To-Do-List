@@ -36,9 +36,9 @@ public:
 
     // ---------------- PAULINA 
 
-    void listarTareas();
+    string listarTareas();
 
-    void mostrar_resumen();
+    string mostrar_resumen();
 
 
     // (del archivo "CambiarEstado.cpp") 
@@ -49,4 +49,3 @@ public:
 
 // Controla el proceso completo de eliminación.
 void opcion_eliminar(ListaTareas& lista);
-
