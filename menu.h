@@ -3,6 +3,10 @@
 #include <string>
 #include "ListaTareas.h"
 
+using namespace std;
+
+
+// ==================== CLASE MENU ====================
 
 class Menu
 {
@@ -14,19 +18,18 @@ public:
 };
 
 
+// ==================== FUNCIONES ====================
+
 // Añadir tarea
 void agregarTareaUI(ListaTareas& lista);
-
 
 // Listar tareas
 void listarTareasUI(ListaTareas& lista);
 
-
 // Cambiar estado
+string solicitarNuevoEstado();
+
 void actualizarEstadoTarea(ListaTareas& lista);
-
-std::string solicitarNuevoEstado();
-
 
 // Eliminar tarea
 void opcion_eliminar(ListaTareas& lista);

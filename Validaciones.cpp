@@ -24,7 +24,7 @@ static string recortar(const string& s) {
 static string leerLinea(const string& mensaje) {
     string linea;
 
-    if (!getline(cin, linea)) 
+    if (!getline(cin, linea))
     {
         throw runtime_error("\nEntrada cerrada. Saliendo del programa.\n");
     }
@@ -32,44 +32,49 @@ static string leerLinea(const string& mensaje) {
 }
 
 int leerEntero(const string& mensaje, int minimo, int maximo) {
-    while (true) 
+    while (true)
     {
         string linea = leerLinea(mensaje);
 
-        if (linea.empty()) 
+        if (linea.empty())
         {
             throw invalid_argument("\nError: no escribiste nada.\n");
         }
 
-        try 
+        try
         {
             size_t pos = 0;
             long valor = stol(linea, &pos);
 
             if (pos != linea.size()) {          // ej. "3abc"
                 throw invalid_argument("\nError: escribe solo numeros.\n");
-            } else if (valor < minimo || valor > maximo) {
+            }
+            else if (valor < minimo || valor > maximo) {
                 throw out_of_range("\nEl numero esta fuera del rango.");
-            } else {
+            }
+            else {
                 return static_cast<int>(valor);
             }
-        } catch (const exception&) {            // ej. "hola" o numero gigante
+        }
+        catch (const exception&) {            // ej. "hola" o numero gigante
             throw invalid_argument("\nError: eso no es un numero valido.\n");
         }
     }
 }
 
 string leerTextoNoVacio(const string& mensaje, size_t maxLargo) {
-    while (true) 
+    while (true)
     {
         string texto = leerLinea(mensaje);
 
-        if (texto.empty()) 
+        if (texto.empty())
         {
             throw invalid_argument("\nError: el texto no puede estar vacio.\n");
-        } else if (texto.size() > maxLargo) {
+        }
+        else if (texto.size() > maxLargo) {
             throw out_of_range("\nExcede el numero maximo de caracteres.\n");
-        } else {
+        }
+        else {
             return texto;
         }
     }
@@ -88,7 +93,7 @@ bool confirmar(const string& mensaje) {
             return true;
         }
 
-        if (r == "n" || r == "no") 
+        if (r == "n" || r == "no")
         {
             return false;
         }
