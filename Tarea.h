@@ -5,7 +5,7 @@ using namespace std;
 
 class Tarea
 {
-private:
+protected:
     string titulo;
     string descripcion;
     string estado;
@@ -31,4 +31,6 @@ public:
    // (del archivo "ListaTareas.cpp")
     void modificar_id(int nuevo_id);
     static void actualizar_siguiente_id(int nuevo_id);
+
+    virtual ~Tarea() {};
 };
