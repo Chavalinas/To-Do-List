@@ -16,7 +16,7 @@ class Tarea
         static string obtener_fecha_actual();
 
     public:
-        Tarea(string titulo, string desc, string estado, int id);
+        Tarea(string titulo, string desc, string fecha, string estado, int id);
 
         string obtener_titulo();
         string obtener_descripcion();

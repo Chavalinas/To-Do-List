@@ -31,7 +31,7 @@ string Tarea::obtener_fecha_actual()
 } 
 
 
-Tarea::Tarea(string titulo, string desc, string estado,int id)
+Tarea::Tarea(string titulo, string desc, string fecha, string estado, int id)
 {
     this->titulo = titulo;
     this->descripcion = desc;
