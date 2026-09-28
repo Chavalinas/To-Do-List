@@ -18,7 +18,7 @@ class TareaPrioritaria : public Tarea
     public:
         TareaPrioritaria(string titulo, Prioridad prioridad, string descripcion, string estado, int id);
 
-        string obtener_prioridad();
+        Prioridad obtener_prioridad();
         void modificar_prioridad(Prioridad nueva_prioridad);
 };
 
