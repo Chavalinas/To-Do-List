@@ -13,5 +13,5 @@ class TareaFechaLimite : public Tarea
         TareaFechaLimite(string titulo, string desc, string fecha, string fecha_limite, string estado, int id);
 
         string obtener_fecha_limite();
-        void modificar_fecha_limite(string nueva_fecha);
+        bool modificar_fecha_limite(string nueva_fecha);
 };
