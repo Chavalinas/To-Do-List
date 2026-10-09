@@ -16,8 +16,11 @@ class TareaPrioritaria : public Tarea
         Prioridad prioridad;
 
     public:
-        TareaPrioritaria(string titulo, Prioridad prioridad, string desc, string fecha, string estado, int id);
+        TareaPrioritaria(string titulo, string desc, Prioridad prioridad, int id);
 
         Prioridad obtener_prioridad();
         void modificar_prioridad(Prioridad nueva_prioridad);
+
+        string obtenerPrioridad() const override;
+        string obtenerTipo() const override;
 };

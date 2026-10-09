@@ -1,14 +1,15 @@
 #include <ctime>
 #include <cstdio>
 #include "TareaFechaLimite.h"
+#include "Validaciones.h"
 
-TareaFechaLimite::TareaFechaLimite(string titulo, string desc, string fecha, string fecha_limite, string estado, int id)
-: Tarea(titulo, desc, fecha, estado, id)
+TareaFechaLimite::TareaFechaLimite(string titulo, string desc, string fecha_limite,  int id)
+: Tarea(titulo, desc, fecha, id)
 {
     this->fecha_limite = fecha_limite;
 }
 
-string TareaFechaLimite::obtener_fecha_limite()
+string TareaFechaLimite::obtener_fecha_limite() const
 {
     return fecha_limite;
 }
@@ -81,3 +82,4 @@ bool TareaFechaLimite::modificar_fecha_limite(string nueva_fecha)
     fecha_limite = nueva_fecha;
     return true; // Al enviar true, permite comprobar el éxito de la modificación, sino envia falso.
 }
+
