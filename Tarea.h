@@ -18,11 +18,11 @@ class Tarea
     public:
         Tarea(string titulo, string desc, string fecha, string estado, int id);
 
-        string obtener_titulo();
-        string obtener_descripcion();
-        string obtener_estado();
-        string obtener_fecha();
-        int obtener_id();
+        string obtener_titulo() const;
+        string obtener_descripcion() const;
+        string obtener_estado() const;
+        string obtener_fecha() const;
+        int obtener_id() const;
 
         void modificar_titulo(string nuevo_titulo);
         void modificar_descripcion(string nueva_desc);
@@ -33,4 +33,12 @@ class Tarea
         static void actualizar_siguiente_id(int nuevo_id);
 
         virtual ~Tarea() = default;
+
+        // Metodos virtuales para polimorfismo.
+        virtual string obtenerFechaLimite() const;
+        virtual string obtenerPrioridad() const;
+        virtual string obtenerTipo() const;
+
+        virtual bool modificarFechaLimite(string nuevaFecha);
+        virtual void modificarPrioridad(string nuevaPrioridad);
 };

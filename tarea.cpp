@@ -47,45 +47,48 @@ Tarea::Tarea(string titulo, string desc, string fecha, string estado, int id)
     else
     {
         this->id = id;
+        if (id >= sig_id)
+        {
+            sig_id = id + 1;
+        }
     }
 }
 
-
-string Tarea::obtener_titulo()
+// Getters.
+string Tarea::obtener_titulo() const
 {
     return titulo;
 }
 
 
-string Tarea::obtener_descripcion()
+string Tarea::obtener_descripcion() const
 {
     return descripcion;
 }
 
 
-string Tarea::obtener_estado()
+string Tarea::obtener_estado() const
 {
     return estado;
 }
 
 
-string Tarea::obtener_fecha()
+string Tarea::obtener_fecha() const
 {
     return fecha;
 }
 
 
-int Tarea::obtener_id()
+int Tarea::obtener_id() const
 {
     return id;
 }
 
-
+// Setters.
 void Tarea::modificar_titulo(string nuevo_titulo)
 {
     titulo = nuevo_titulo;
 }
-
 
 void Tarea::modificar_descripcion(string nueva_desc)
 {
@@ -116,4 +119,38 @@ void Tarea::modificar_id(int nuevo_id)
 void Tarea::actualizar_siguiente_id(int nuevo_id)
 {
     sig_id = nuevo_id;
+}
+
+// Polimorfismo.
+// - Setters.
+
+bool Tarea::modificarFechaLimite(string nuevaFecha)
+{
+    fechaLimite = nuevaFecha;
+
+    return true;
+}
+
+void Tarea::modificarPrioridad(string nuevaPrioridad)
+{
+    prioridad = nuevaPrioridad;
+}
+
+// - Getters.
+
+string Tarea::obtenerFechaLimite() const
+{
+    return fechaLimite;
+}
+
+
+string Tarea::obtenerPrioridad() const
+{
+    return prioridad;
+}
+
+
+string Tarea::obtenerTipo() const
+{
+    return "Normal";
 }
