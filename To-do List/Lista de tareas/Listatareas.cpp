@@ -144,3 +144,28 @@ bool ListaTareas::cambiar_estado(int id, string nuevo_estado)
     //busca la tarea con el ID para cambiar el estado 
 }
 
+// ------------------ LISTAR FECHA LIMITE
+void ListaTareas::listarFechaLimite() {
+    cout << "\n===== TAREAS CON FECHA LIMITE =====\n";
+    cout << "Nombre de la tarea\tFecha limite\n";
+    cout << "----------------------------------------\n";
+
+    for (int i = 0; i < tareas.size(); i++) {
+        cout << tareas[i].obtener_titulo() << "\t\t"
+             << tareas[i].obtener_fecha_limite() << endl;
+    }
+}
+
+// ------------------ LISTAR TAREAS PRIORITARIAS
+void ListaTareas::listarTareasPrioritarias() {
+    cout << "\n===== TAREAS PRIORITARIAS =====\n";
+    cout << "Nombre de la tarea\tPrioridad\n";
+    cout << "----------------------------------------\n";
+
+    for (int i = 0; i < tareas.size(); i++) {
+        if (tareas[i].obtener_prioridad() == "ALTA") {
+            cout << tareas[i].obtener_titulo() << "\t\t"
+                 << tareas[i].obtener_prioridad() << endl;
+        }
+    }
+}

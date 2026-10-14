@@ -33,3 +33,9 @@ void actualizarEstadoTarea(ListaTareas& lista);
 
 // Eliminar tarea
 void opcion_eliminar(ListaTareas& lista);
+
+// Listar prioritarias
+void listarPrioritariasUI(ListaTareas& lista);
+
+//Listar por fecha limite
+void listarPorFechaLimiteUI(ListaTareas& lista);

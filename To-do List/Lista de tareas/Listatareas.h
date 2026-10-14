@@ -33,6 +33,9 @@ public:
     // Devuelve la cantidad de tareas
     int cantidad();
 
+    void listarFechaLimite();
+    void listarTareasPrioritarias();
+
 
     // ---------------- PAULINA 
 
