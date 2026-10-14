@@ -272,7 +272,18 @@ void opcion_eliminar(ListaTareas& lista)
 
         return;
     }
+    
+    // ==================== LISTAR PRIORITARIAS / FECHA LIMITE ====================
 
+void listarPrioritariasUI(ListaTareas& lista)
+{
+    lista.listarTareasPrioritarias();
+}
+
+void listarPorFechaLimiteUI(ListaTareas& lista)
+{
+    lista.listarFechaLimite();
+}
 
     mensajes::showmessage(
         "\n========== ELIMINAR TAREA ==========\n"
