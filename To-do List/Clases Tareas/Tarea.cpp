@@ -30,13 +30,16 @@ string Tarea::obtener_fecha_actual()
     return string(fecha_actual);
 }
 
+Tarea::Tarea(string titulo, string desc, string estado, int id,
+             string fecha_limite, string prioridad)
 
-Tarea::Tarea(string titulo, string desc, string estado, int id)
 {
     this->titulo = titulo;
     this->descripcion = desc;
     this->fecha = obtener_fecha_actual();
     this->estado = "pendiente";
+    this->fecha_limite = fecha_limite;
+    this->prioridad = prioridad;
 
     // Si no se proporciona un ID, se genera automáticamente
     if (id == 0)
@@ -116,4 +119,14 @@ void Tarea::modificar_id(int nuevo_id)
 void Tarea::actualizar_siguiente_id(int nuevo_id)
 {
     sig_id = nuevo_id;
+}
+
+string Tarea::obtener_fecha_limite()
+{
+    return fecha_limite;
+}
+
+string Tarea::obtener_prioridad()
+{
+    return prioridad;
 }
