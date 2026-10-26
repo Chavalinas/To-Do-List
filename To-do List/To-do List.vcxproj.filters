@@ -39,6 +39,12 @@
     <ClCompile Include="mensajes.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="tarea_prioritaria.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="fecha.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h">
@@ -64,6 +70,18 @@
     </ClInclude>
     <ClInclude Include="mensajes.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TareaPrioritaria.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="tareafechalimite.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="tarea_fecha_limite.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="fecha.h">
+      <Filter>Archivos de origen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

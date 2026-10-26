@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="AñadirTarea.cpp" />
     <ClCompile Include="CambiarEstado.cpp" />
+    <ClCompile Include="fecha.cpp" />
     <ClCompile Include="Listatareas.cpp" />
     <ClCompile Include="mensajes.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="tarea_prioritaria.cpp" />
     <ClCompile Include="To-do list.cpp" />
     <ClCompile Include="Tarea.cpp" />
     <ClCompile Include="Validaciones.cpp" />
@@ -152,10 +154,14 @@
     <ClInclude Include="AnadirTarea.h" />
     <ClInclude Include="AñadirTarea.h" />
     <ClInclude Include="CambiarEstado.h" />
+    <ClInclude Include="fecha.h" />
     <ClInclude Include="Listatareas.h" />
     <ClInclude Include="mensajes.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="Tarea.h" />
+    <ClInclude Include="tareafechalimite.h" />
+    <ClInclude Include="TareaPrioritaria.h" />
+    <ClInclude Include="tarea_fecha_limite.h" />
     <ClInclude Include="Validaciones.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
