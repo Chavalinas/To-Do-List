@@ -1,0 +1,19 @@
+TO-DO LIST - PROYECTO CORREGIDO
+
+1. Extrae este ZIP en una carpeta nueva.
+2. Abre To-do List.slnx o To-do List.vcxproj dentro de esta carpeta.
+3. Compila el proyecto completo. No mezcles estos archivos con las copias antiguas.
+
+Estado: 0 = pendiente, 1 = en progreso, 2 = terminada. No se utiliza Estado.h.
+Fecha de creacion: automatica. Fecha limite: opcional, pregunta s/n y luego dia, mes y año.
+Las fechas se manejan en fecha.h y fecha.cpp.
+Se conservan las dos hijas, los menus, los IDs permanentes y los listados.
+TareaPrioritaria tiene sobrecarga de constructores y Fecha sobrecarga < y ==.
+
+Pruebas/Pruebas.cpp tiene otro main. No lo agregues como fuente al proyecto principal.
+Para ejecutarlo, usa un proyecto de consola separado con los mismos archivos de logica,
+sin Menu.cpp ni To-do list.cpp.
+
+Validacion realizada: GCC C++20, 33 comprobaciones y seis recorridos del menu correctos.
+No se ejecuto Visual Studio en este entorno.
+El programa mantiene las tareas durante la ejecucion; no guarda datos al cerrar.
