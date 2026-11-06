@@ -1,0 +1,296 @@
+# ============================================================
+# C++ PROJECT - GENERAL .gitignore
+# Windows / VS Code / Visual Studio / CMake / CLion
+# ============================================================
+
+
+# ------------------------------------------------------------
+# 1. SECRETS & CREDENTIALS
+# ------------------------------------------------------------
+
+# Environment variables / configuration files
+.env
+.env.*
+!.env.example
+
+# Credentials / secrets
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+credentials.json
+secrets.json
+service-account.json
+
+# Local configuration
+config.local.*
+config.local.*
+settings.local.*
+
+
+# ------------------------------------------------------------
+# 2. COMPILED C/C++ FILES
+# ------------------------------------------------------------
+
+# Object files
+*.o
+*.obj
+
+# Static libraries
+*.a
+*.lib
+
+# Shared libraries
+*.so
+*.dll
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug symbols
+*.dSYM/
+*.pdb
+*.ilk
+
+# Precompiled headers
+*.gch
+*.pch
+
+
+# ------------------------------------------------------------
+# 3. BUILD DIRECTORIES
+# ------------------------------------------------------------
+
+build/
+build-*/
+cmake-build-*/
+out/
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+Win32/
+ARM/
+ARM64/
+
+
+# ------------------------------------------------------------
+# 4. CMAKE
+# ------------------------------------------------------------
+
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+Makefile
+
+
+# ------------------------------------------------------------
+# 5. VISUAL STUDIO
+# ------------------------------------------------------------
+
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio generated files
+ipch/
+*.VC.db
+*.VC.VC.opendb
+
+
+# ------------------------------------------------------------
+# 6. VS CODE
+# ------------------------------------------------------------
+
+# Personal VS Code settings
+.vscode/
+
+# Uncomment these if you want to share specific VS Code files:
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+
+
+# ------------------------------------------------------------
+# 7. CLION / JETBRAINS
+# ------------------------------------------------------------
+
+.idea/
+*.iml
+
+
+# ------------------------------------------------------------
+# 8. CODE::BLOCKS
+# ------------------------------------------------------------
+
+*.cbp
+*.depend
+*.layout
+
+
+# ------------------------------------------------------------
+# 9. DEV-C++
+# ------------------------------------------------------------
+
+*.layout
+
+
+# ------------------------------------------------------------
+# 10. COMPILER / TOOLCHAIN FILES
+# ------------------------------------------------------------
+
+*.stackdump
+*.d
+*.s
+
+
+# ------------------------------------------------------------
+# 11. DEBUGGING / LOGS
+# ------------------------------------------------------------
+
+*.log
+logs/
+*.trace
+*.dump
+
+
+# ------------------------------------------------------------
+# 12. TEMPORARY FILES
+# ------------------------------------------------------------
+
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+*~
+.DS_Store
+Thumbs.db
+
+
+# ------------------------------------------------------------
+# 13. WINDOWS FILES
+# ------------------------------------------------------------
+
+# Windows Explorer metadata
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Windows crash dumps
+*.dmp
+
+
+# ------------------------------------------------------------
+# 14. TEST / COVERAGE OUTPUT
+# ------------------------------------------------------------
+
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+
+# ------------------------------------------------------------
+# 15. PACKAGE MANAGERS
+# ------------------------------------------------------------
+
+# vcpkg
+vcpkg_installed/
+
+# Conan
+.conan/
+conan.lock
+
+# NuGet (if used with C++)
+packages/
+
+
+# ------------------------------------------------------------
+# 16. DOCUMENTATION / GENERATED FILES
+# ------------------------------------------------------------
+
+# Doxygen generated documentation
+docs/html/
+docs/latex/
+docs/man/
+docs/xml/
+
+# Generated documentation
+_doxygen/
+
+
+# ------------------------------------------------------------
+# 17. LOCAL DATABASES
+# ------------------------------------------------------------
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Local database files
+*.db-shm
+*.db-wal
+
+
+# ------------------------------------------------------------
+# 18. USER-SPECIFIC DATA
+# ------------------------------------------------------------
+
+# Local test data that may contain private information
+data/local/
+data/private/
+test-data/local/
+
+# Local configuration
+local/
+.local/
+
+
+# ------------------------------------------------------------
+# 19. GENERATED FILES
+# ------------------------------------------------------------
+
+generated/
+generated-code/
+generated-src/
+
+
+# ------------------------------------------------------------
+# 20. BACKUP FILES
+# ------------------------------------------------------------
+
+*.old
+*.orig
+*.backup
+*.save
+
+
+# ------------------------------------------------------------
+# IMPORTANT:
+# NEVER add these to Git:
+#
+# - Passwords
+# - API keys
+# - Tokens
+# - Private keys
+# - Database credentials
+# - Personal certificates
+# - Production configuration
+# - Personal/private datasets
+# ------------------------------------------------------------
