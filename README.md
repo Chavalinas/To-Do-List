@@ -10,7 +10,7 @@
 
 <p align="center">
 
-![C++](https://img.shields.io/badge/C++-17-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
+![C++](https://img.shields.io/badge/C++-20-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
 ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2026-5C2D91?style=for-the-badge&logo=visualstudio&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-Control%20de%20Versiones-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Repositorio-181717?style=for-the-badge&logo=github&logoColor=white)
@@ -27,6 +27,8 @@ El proyecto fue desarrollado para la asignatura de **Programación Orientada a O
 
 - Clases y objetos
 - Encapsulamiento
+- Herencia y polimorfismo
+- Sobrecarga de constructores y operadores
 - Modularización
 - Validaciones
 - Manejo de excepciones
@@ -44,12 +46,13 @@ El proyecto fue desarrollado para la asignatura de **Programación Orientada a O
 
 ### ➕ Gestión de tareas
 
-- Crear nuevas tareas
-- Asignar ID automáticamente
-- Guardar título
-- Guardar descripción
+- Crear tareas **prioritarias** o con **fecha límite**
+- Asignar ID automáticamente (permanente)
+- Guardar título y descripción
 - Registrar estado
-- Registrar fecha
+- Fecha de creación automática
+- Fecha límite opcional (`s/n`)
+- Prioridad `ALTA` / `BAJA`
 
 </td>
 
@@ -57,12 +60,13 @@ El proyecto fue desarrollado para la asignatura de **Programación Orientada a O
 
 ### ⚙️ Administración
 
-- Listar tareas
-- Cambiar estados
-- Eliminar tareas
-- Renumerar IDs
+- Listar todas las tareas
+- Listar por prioridad
+- Listar por fecha límite
+- Mostrar una tarea por ID
+- Modificar nombre, descripción, estado, prioridad o fecha límite
+- Eliminar tareas con confirmación
 - Validar entradas
-- Confirmar eliminaciones
 
 </td>
 </tr>
@@ -71,9 +75,9 @@ El proyecto fue desarrollado para la asignatura de **Programación Orientada a O
 Los estados disponibles son:
 
 ```text
-Pendiente
-En progreso
-Completada
+0 → Pendiente
+1 → En progreso
+2 → Terminada
 ```
 
 ---
@@ -85,12 +89,15 @@ Completada
 ║          TO-DO LIST            ║
 ╠════════════════════════════════╣
 ║  1. Añadir tarea               ║
-║  2. Listar tareas              ║
-║  3. Cambiar estado             ║
-║  4. Eliminar tarea             ║
-║  5. Salir                      ║
+║  2. Eliminar tarea             ║
+║  3. Modificar tarea            ║
+║  4. Mostrar tarea              ║
+║  5. Listar tarea               ║
+║  6. Salir del programa         ║
 ╚════════════════════════════════╝
 ```
+
+Si todavía no hay tareas, el menú solo muestra *Añadir tarea*, *Listar tarea* y *Salir del programa*.
 
 ---
 
@@ -102,8 +109,8 @@ flowchart TD
     A["main()"] --> B["Menu"]
 
     B --> C["Añadir tarea"]
-    B --> D["Listar tareas"]
-    B --> E["Cambiar estado"]
+    B --> D["Listar / Mostrar"]
+    B --> E["Modificar tarea"]
     B --> F["Eliminar tarea"]
 
     C --> G["ListaTareas"]
@@ -111,7 +118,10 @@ flowchart TD
     E --> G
     F --> G
 
-    G --> H["Tarea"]
+    G --> H["Tarea (abstracta)"]
+    H --> P["TareaPrioritaria"]
+    H --> Q["TareaFechaLimite"]
+    H --> R["Fecha"]
 
     B --> I["mensajes"]
     C --> J["Validaciones"]
@@ -133,25 +143,46 @@ TO-DO LIST
 ├── To-do list.cpp
 │   └── Punto de entrada principal
 │
-├── Tarea.h
-├── Tarea.cpp
-│   └── Representa una tarea individual
+├── Clases Tareas/
+│   ├── Tarea.h
+│   └── Tarea.cpp
+│       └── Clase base abstracta y enum Prioridad
 │
-├── ListaTareas.h
-├── ListaTareas.cpp
-│   └── Administra todas las tareas
+├── TareaPrioritaria.h
+├── tarea_prioritaria.cpp
+│   └── Tarea con prioridad (fecha límite opcional)
 │
-├── menu.h
-├── Menu.cpp
-│   └── Controla la interacción con el usuario
+├── tareafechalimite.h
+├── tarea_fecha_limite.cpp
+│   └── Tarea con fecha límite
 │
-├── Validaciones.h
-├── Validaciones.cpp
-│   └── Controla y valida las entradas
+├── fecha.h
+├── fecha.cpp
+│   └── Manejo y validación de fechas dd/mm/aaaa
 │
-├── mensajes.h
-└── mensajes.cpp
-    └── Centraliza la salida de mensajes
+├── Lista de tareas/
+│   ├── Listatareas.h
+│   └── Listatareas.cpp
+│       └── Administra todas las tareas
+│
+├── menu/
+│   ├── menu.h
+│   └── Menu.cpp
+│       └── Controla la interacción con el usuario
+│
+├── Validaciones y Mensajes/
+│   ├── Validaciones.h / Validaciones.cpp
+│   │   └── Controla y valida las entradas
+│   ├── mensajes.h / mensajes.cpp
+│   │   └── Centraliza la salida de mensajes
+│   └── Pruebas.cpp
+│       └── Pruebas automáticas (tiene su propio main)
+│
+├── To-do List.slnx / To-do List.vcxproj
+│   └── Proyecto de Visual Studio
+│
+└── xmake.lua
+    └── Compilación en Linux con xmake
 ```
 
 ---
@@ -160,23 +191,62 @@ TO-DO LIST
 
 ## `Tarea`
 
-Representa una tarea individual dentro del sistema.
+Clase base **abstracta** que representa una tarea individual dentro del sistema.
 
 Cada objeto contiene:
 
 ```text
-┌─────────────────┐
-│      TAREA      │
-├─────────────────┤
-│ ID              │
-│ Título          │
-│ Descripción     │
-│ Estado          │
-│ Fecha           │
-└─────────────────┘
+┌──────────────────┐
+│      TAREA       │
+├──────────────────┤
+│ ID               │
+│ Título           │
+│ Descripción      │
+│ Estado           │
+│ Fecha de creación│
+└──────────────────┘
 ```
 
-La clase también contiene métodos para consultar y modificar sus atributos.
+Define métodos virtuales puros (`obtenerFechaLimite()`, `obtenerPrioridad()`, `obtenerTipo()`, etc.) que cada tipo de tarea implementa a su manera.
+
+---
+
+## Herencia: `TareaPrioritaria` y `TareaFechaLimite`
+
+```mermaid
+classDiagram
+    Tarea <|-- TareaPrioritaria
+    Tarea <|-- TareaFechaLimite
+    class Tarea {
+        <<abstract>>
+        #titulo
+        #descripcion
+        #estado
+        #fechaCreacion
+        #id
+    }
+    class TareaPrioritaria {
+        -prioridad
+        -fechaLimite
+    }
+    class TareaFechaLimite {
+        -fechaLimite
+        -prioridad
+    }
+```
+
+- **`TareaPrioritaria`**: tiene **sobrecarga de constructores**. Se puede crear con o sin fecha límite.
+- **`TareaFechaLimite`**: la fecha límite es obligatoria y la prioridad es `BAJA` por defecto.
+
+---
+
+## `Fecha`
+
+Encapsula día, mes y año.
+
+- Valida fechas reales, incluidos los años bisiestos (`30/02/2027` es inválida)
+- Convierte desde y hacia el texto `dd/mm/aaaa`
+- **Sobrecarga de operadores** `<` y `==` para comparar y ordenar fechas
 
 ---
 
@@ -184,10 +254,10 @@ La clase también contiene métodos para consultar y modificar sus atributos.
 
 Administra el conjunto completo de tareas.
 
-Internamente utiliza:
+Internamente utiliza punteros inteligentes, lo que permite guardar los dos tipos de tarea (polimorfismo):
 
 ```cpp
-vector<Tarea> tareas;
+std::vector<std::unique_ptr<Tarea>> tareas;
 ```
 
 Sus principales responsabilidades son:
@@ -195,13 +265,13 @@ Sus principales responsabilidades son:
 ```text
 ListaTareas
 │
-├── agregar_tarea()
-├── eliminar_tarea()
-├── existe_tarea()
+├── agregarTarea()
+├── eliminarTarea()
+├── existeTarea()
+├── buscarTarea()
 ├── cantidad()
-├── listarTareas()
-├── mostrar_resumen()
-└── cambiar_estado()
+├── obtenerTareas(TODAS | PRIORIDAD | FECHA_LIMITE)
+└── cambiarEstado()
 ```
 
 En resumen:
@@ -305,7 +375,8 @@ El sistema evita entradas incorrectas mediante funciones reutilizables.
 | 📝 Texto vacío | Impide campos obligatorios vacíos |
 | 📐 Longitud | Controla el tamaño máximo del texto |
 | 🔎 ID existente | Verifica que la tarea exista |
-| ✅ Confirmación | Solicita respuesta `s/n` |
+| ✅ Confirmación | Acepta `s/si` y `n/no`, sin distinguir mayúsculas |
+| 📅 Fecha límite | Debe existir y no puede ser anterior a la fecha de creación |
 
 ---
 
@@ -313,39 +384,31 @@ El sistema evita entradas incorrectas mediante funciones reutilizables.
 
 ```text
 ========== TO-DO LIST ==========
+
 1. Añadir tarea
-2. Listar tareas
-3. Cambiar estado
-4. Eliminar tarea
-5. Salir
-================================
+2. Listar tarea
+3. Salir del programa
 
 Selecciona una opcion: 1
-
-========== AÑADIR TAREA ==========
-
-Ingresa el titulo de la tarea:
-Proyecto POO
-
-Ingresa la descripcion de la tarea:
-Terminar To-Do List
-
-Tarea añadida correctamente.
-ID asignado: 1
 ```
+
+Después se piden el nombre, la descripción (opcional), la prioridad y, si se quiere, una fecha límite:
+
+- **Sin fecha límite** → se crea una `TareaPrioritaria`
+- **Con fecha límite** → se crea una `TareaFechaLimite`
+
+Al final se muestra la fecha de creación y el ID asignado automáticamente.
 
 ---
 
 # ✦ Listado de tareas
 
-El programa organiza las tareas en formato de tabla:
+Al listar se puede elegir el orden:
 
 ```text
-ID   Descripcion                        Estado              Fecha
----------------------------------------------------------------------------
-1    Hacer tarea                        pendiente           17/09/2026
-2    Estudiar C++                       en progreso         17/09/2026
-3    Terminar proyecto                  completada          16/09/2026
+1. Listar todas las tareas
+2. Listar tareas prioritarias
+3. Listar tareas por fecha limite
 ```
 
 ---
@@ -384,36 +447,27 @@ sequenceDiagram
 
 ### Integración de clases
 
-Se unificaron las diferentes versiones de `Tarea` y `ListaTareas` utilizadas durante el desarrollo.
+Se unificaron las diferentes versiones de `Tarea` y `ListaTareas` utilizadas durante el desarrollo, y el repositorio se limpió para dejar una sola versión del proyecto.
 
-### IDs automáticos
+### Herencia y polimorfismo
 
-Cada nueva tarea recibe automáticamente un identificador.
+`Tarea` pasó a ser una clase abstracta con dos hijas: `TareaPrioritaria` y `TareaFechaLimite`.
+
+### Manejo de fechas
+
+Se creó la clase `Fecha` para validar fechas y compararlas con los operadores `<` y `==`.
+
+### IDs permanentes
+
+Cada nueva tarea recibe automáticamente un identificador que **no cambia** aunque se eliminen otras tareas.
 
 ```text
 1 → 2 → 3 → 4 → ...
 ```
 
-### Renumeración
+### Pruebas automáticas
 
-Después de eliminar una tarea:
-
-```text
-ANTES
-
-1
-2
-3
-4
-
-Eliminar ID 2
-
-DESPUÉS
-
-1
-2
-3
-```
+`Pruebas.cpp` contiene 36 comprobaciones de la lógica del programa.
 
 ### Validación de IDs
 
@@ -535,6 +589,16 @@ Compilar solución
 ```text
 Depurador local de Windows
 ```
+
+### En Linux (con xmake)
+
+```bash
+xmake          # compila
+xmake run todo # ejecuta el programa
+xmake build pruebas && xmake run pruebas  # ejecuta las pruebas
+```
+
+> `Pruebas.cpp` tiene su propio `main`, así que no se agrega al proyecto principal de Visual Studio.
 
 ---
 
