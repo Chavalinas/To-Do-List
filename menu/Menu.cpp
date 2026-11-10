@@ -387,8 +387,10 @@ void Menu::modificarTareaPorId(int id)
 
     case 5:
     {
+        // Responder que no conserva la fecha limite actual.
         string fechaLimite = solicitarFecha(
-            tarea->obtenerFechaCreacion()
+            tarea->obtenerFechaCreacion(),
+            tarea->obtenerFechaLimite()
         );
 
         if (!tarea->modificarFechaLimite(fechaLimite))
@@ -604,7 +606,10 @@ Prioridad Menu::solicitarPrioridad()
 }
 
 // SOLICITAR FECHA LIMITE
-string Menu::solicitarFecha(const string& fechaCreacion)
+string Menu::solicitarFecha(
+    const string& fechaCreacion,
+    const string& fechaSinCambios
+)
 {
     bool introducirFecha = pedirConfirmacion(
         "Deseas introducir una fecha limite? (s/n): "
@@ -612,7 +617,7 @@ string Menu::solicitarFecha(const string& fechaCreacion)
 
     if (!introducirFecha)
     {
-        return "";
+        return fechaSinCambios;
     }
 
     while (true)
@@ -704,12 +709,16 @@ void Menu::agregarTarea()
 
     unique_ptr<Tarea> nuevaTarea;
 
+    // Se usa la misma fecha de creacion con la que se valido la fecha limite,
+    // aunque el dia cambie mientras se llenan los datos.
     if (fechaLimite.empty())
     {
         nuevaTarea = make_unique<TareaPrioritaria>(
             titulo,
             descripcion,
-            prioridad
+            prioridad,
+            "",
+            fechaCreacion
         );
     }
     else
@@ -718,7 +727,8 @@ void Menu::agregarTarea()
             titulo,
             descripcion,
             fechaLimite,
-            prioridad
+            prioridad,
+            fechaCreacion
         );
     }
 

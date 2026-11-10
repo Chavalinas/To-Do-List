@@ -132,6 +132,7 @@ int Fecha::obtenerAnio() const
     return anio;
 }
 
+// Sobrecarga de operador 
 // Compara primero el anio, luego el mes y al final el dia
 bool Fecha::operator<(const Fecha& otra) const
 {

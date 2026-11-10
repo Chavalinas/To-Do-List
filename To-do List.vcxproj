@@ -155,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clases Tareas\Tarea.h" />
-    <ClInclude Include="Clases Tareas\Prioridad.h" />
     <ClInclude Include="fecha.h" />
     <ClInclude Include="Lista de tareas\Listatareas.h" />
     <ClInclude Include="menu\menu.h" />

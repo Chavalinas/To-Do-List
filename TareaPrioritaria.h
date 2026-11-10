@@ -24,6 +24,15 @@ public:
         Prioridad prioridad
     );
 
+    // Usa una fecha de creacion ya obtenida.
+    TareaPrioritaria(
+        const std::string& titulo,
+        const std::string& descripcion,
+        Prioridad prioridad,
+        const std::string& fechaLimite,
+        const std::string& fechaCreacion
+    );
+
     Prioridad obtenerPrioridad() const override;
 
     void modificarPrioridad(Prioridad nuevaPrioridad) override;

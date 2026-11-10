@@ -28,8 +28,10 @@ private:
     int solicitarId(const std::string& mensaje);
     Prioridad solicitarPrioridad();
 
+    // fechaSinCambios se regresa si responde que no quiere introducir fecha.
     std::string solicitarFecha(
-        const std::string& fechaCreacion
+        const std::string& fechaCreacion,
+        const std::string& fechaSinCambios = ""
     );
 
     int solicitarNuevoEstado();

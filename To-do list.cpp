@@ -1,87 +1,40 @@
 #include <iostream>
-#include <limits>
+#include <exception>
+
+#ifdef _WIN32
 #define NOMINMAX
 #include <windows.h>
+#endif
 
-#include "Tarea.h"
-#include "ListaTareas.h"
-#include "Validaciones.h"
-#include "AnadirTarea.h"
-#include "CambiarEstado.h"
-#include "menu.h"
+#include "Lista de tareas/Listatareas.h"
+#include "Validaciones y Mensajes/Validaciones.h"
+#include "menu/menu.h"
 
 using namespace std;
 
 int main()
 {
-
+#ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
+#endif
 
     ListaTareas lista;
+    Menu menu(lista);
 
-    Menu menu;
-
-    int opcion;
-
-    do
+    try
     {
-        menu.mostrarMenu();
-
-        opcion = menu.pedirSeleccion();
-
-
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        switch (opcion)
-        {
-        case 1:
-
-            //funcion de "AñadirTarea.cpp"
-            agregarTareaUI(lista);
-
-            break;
-
-
-        case 2:
-
-            //Funcion de "ListarTarea.cpp"
-            listarTareasUI(lista);
-
-            break;
-
-
-        case 3:
-
-            //Funcion de "CambiarEstado"
-            actualizarEstadoTarea(lista);
-
-            break;
-
-
-        case 4:
-
-			//Funcion de "ListaTareas.cpp"
-            opcion_eliminar(lista);
-
-            break;
-
-
-        case 5:
-
-            cout << "\nSaliendo del programa...\n";
-
-            break;
-
-
-        default:
-
-            cout << "\nOpción inválida.\n";
-
-            break;
-        }
-
-    } while (opcion != 5);
+        menu.ejecutar();
+    }
+    catch (const EntradaCerrada& e)
+    {
+        cout << "\n" << e.what() << "\n";
+    }
+    catch (const exception& e)
+    {
+        cout << "\nError: " << e.what() << "\n";
+        return 1;
+    }
 
     return 0;
 }

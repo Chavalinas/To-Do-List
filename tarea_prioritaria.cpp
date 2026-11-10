@@ -12,9 +12,27 @@ TareaPrioritaria::TareaPrioritaria(
     Prioridad prioridad,
     const string& fechaLimite
 )
+    : TareaPrioritaria(
+        titulo,
+        descripcion,
+        prioridad,
+        fechaLimite,
+        Tarea::fechaActual()
+    )
+{
+}
+
+TareaPrioritaria::TareaPrioritaria(
+    const string& titulo,
+    const string& descripcion,
+    Prioridad prioridad,
+    const string& fechaLimite,
+    const string& fechaCreacion
+)
     : Tarea(
         titulo,
-        descripcion
+        descripcion,
+        fechaCreacion
     )
 {
     this->prioridad = prioridad;
@@ -27,7 +45,7 @@ TareaPrioritaria::TareaPrioritaria(
     }
 }
 
-//sobrecarga añadida
+//sobrecarga constructor 
 TareaPrioritaria::TareaPrioritaria(
     const string& titulo,
     const string& descripcion,

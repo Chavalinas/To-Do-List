@@ -10,10 +10,10 @@ Las fechas se manejan en fecha.h y fecha.cpp.
 Se conservan las dos hijas, los menus, los IDs permanentes y los listados.
 TareaPrioritaria tiene sobrecarga de constructores y Fecha sobrecarga < y ==.
 
-Pruebas/Pruebas.cpp tiene otro main. No lo agregues como fuente al proyecto principal.
+Validaciones y Mensajes/Pruebas.cpp tiene otro main. No lo agregues como fuente al proyecto principal.
 Para ejecutarlo, usa un proyecto de consola separado con los mismos archivos de logica,
 sin Menu.cpp ni To-do list.cpp.
 
-Validacion realizada: GCC C++20, 33 comprobaciones y seis recorridos del menu correctos.
+Validacion realizada: GCC C++20, 36 comprobaciones y seis recorridos del menu correctos.
 No se ejecuto Visual Studio en este entorno.
 El programa mantiene las tareas durante la ejecucion; no guarda datos al cerrar.

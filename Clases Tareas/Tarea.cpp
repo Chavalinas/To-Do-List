@@ -13,10 +13,19 @@ Tarea::Tarea(
     const string& titulo,
     const string& descripcion
 )
+    : Tarea(titulo, descripcion, fechaActual())
+{
+}
+
+Tarea::Tarea(
+    const string& titulo,
+    const string& descripcion,
+    const string& fechaCreacion
+)
 {
     this->titulo = titulo;
     this->descripcion = descripcion;
-    this->fechaCreacion = fechaActual();
+    this->fechaCreacion = fechaCreacion;
 
     // Estado inicial: pendiente.
     this->estado = 0;

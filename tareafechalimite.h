@@ -18,6 +18,15 @@ public:
         Prioridad prioridad = Prioridad::BAJA
     );
 
+    // Usa una fecha de creacion ya obtenida.
+    TareaFechaLimite(
+        const std::string& titulo,
+        const std::string& descripcion,
+        const std::string& fechaLimite,
+        Prioridad prioridad,
+        const std::string& fechaCreacion
+    );
+
     std::string obtenerFechaLimite() const override;
 
     bool modificarFechaLimite(const std::string& nuevaFecha) override;

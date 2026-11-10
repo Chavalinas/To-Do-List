@@ -12,9 +12,27 @@ TareaFechaLimite::TareaFechaLimite(
     const string& fechaLimite,
     Prioridad prioridad
 )
+    : TareaFechaLimite(
+        titulo,
+        descripcion,
+        fechaLimite,
+        prioridad,
+        Tarea::fechaActual()
+    )
+{
+}
+
+TareaFechaLimite::TareaFechaLimite(
+    const string& titulo,
+    const string& descripcion,
+    const string& fechaLimite,
+    Prioridad prioridad,
+    const string& fechaCreacion
+)
     : Tarea(
         titulo,
-        descripcion
+        descripcion,
+        fechaCreacion
     )
 {
     this->prioridad = prioridad;
