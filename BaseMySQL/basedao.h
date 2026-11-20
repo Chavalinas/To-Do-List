@@ -15,7 +15,7 @@ class BaseDAO
         ~BaseDAO();
 
         bool conectar(const string& host, const string& usuario,
-                    const string& db, unsigned int port);
+                    const string& db, unsigned int puerto);
         void desconectar();
         bool conf_conexion();
 };
