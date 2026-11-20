@@ -42,3 +42,29 @@ bool BaseDAO::conectar(const string& host,
     cout << "--> Conexión exitosa a MySQL.\n";
     return true;
 }
+
+void BaseDAO::desconectar()
+{
+    if (conexion != nullptr)
+    {
+        mysql_close(conexion);
+        conexion = nullptr;
+        conectado = false;
+    }
+}
+
+bool BaseDAO::conf_conexion()
+{
+    try
+    {
+        Configuracion config = Configuracion::cargar();
+
+        return conectar(config.host, config.usuario, 
+            config.password, config.basedatos, config.puerto);
+    }
+    catch(const exception& e)
+    {
+        cerr << e.what() << '\n';
+        return false;
+    }
+}
