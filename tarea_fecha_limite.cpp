@@ -54,16 +54,16 @@ string TareaFechaLimite::obtenerFechaLimite() const
 // Modificador
 bool TareaFechaLimite::modificarFechaLimite(const string& nuevaFecha)
 {
-    if (!validarFechaLimite(nuevaFecha, obtenerFechaCreacion()))
-    {
-        return false;
-    }
-
     // Enter (texto vacio) significa quitar la fecha limite
     if (nuevaFecha.empty())
     {
         fechaLimite = "";
         return true;
+    }
+    
+    if (!validarFechaLimite(nuevaFecha, obtenerFechaCreacion()))
+    {
+        return false;
     }
 
     // Se guarda siempre con el mismo formato dd/mm/aaaa
