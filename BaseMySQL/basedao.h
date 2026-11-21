@@ -18,4 +18,6 @@ class BaseDAO
                     const string& db, unsigned int puerto);
         void desconectar();
         bool conf_conexion();
+
+        MYSQL* obtenerConexion() const;
 };

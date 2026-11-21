@@ -68,3 +68,8 @@ bool BaseDAO::conf_conexion()
         return false;
     }
 }
+
+MYSQL* BaseDAO::obtenerConexion() const
+{
+    return conectado ? conexion : nullptr;
+}
