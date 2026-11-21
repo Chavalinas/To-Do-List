@@ -397,3 +397,107 @@ bool TareaDAO::actualizarTarea(
 
     return true;
 }
+
+// ----------------- ELIMINAR TAREA (PERMANENTE) ----------------- //
+
+bool TareaDAO::eliminarTarea(
+    int id_tarea,
+    int id_usuario)
+{
+    MYSQL* conexion = db.obtenerConexion();
+
+    if (conexion == nullptr)
+        return false;
+
+    if (mysql_query(conexion, "START TRANSACTION") != 0)
+        return false;
+
+    // Verificar que la tarea pertenece al usuario.
+    string verificar =
+        "SELECT id_tarea FROM tarea_usuario "
+        "WHERE id_tarea = " + to_string(id_tarea) +
+        " AND id_usuario = " + to_string(id_usuario);
+
+    if (mysql_query(conexion, verificar.c_str()) != 0)
+    {
+        mysql_query(conexion, "ROLLBACK");
+        return false;
+    }
+
+    MYSQL_RES* resultado = mysql_store_result(conexion);
+
+    if (resultado == nullptr)
+    {
+        mysql_query(conexion, "ROLLBACK");
+        return false;
+    }
+
+    bool existe = mysql_num_rows(resultado) > 0;
+
+    mysql_free_result(resultado);
+
+    if (!existe)
+    {
+        mysql_query(conexion, "ROLLBACK");
+        return false;
+    }
+
+    // Eliminar la relacion del usuario con la tarea.
+    string eliminarRelacion =
+        "DELETE FROM tarea_usuario "
+        "WHERE id_tarea = " + to_string(id_tarea) +
+        " AND id_usuario = " + to_string(id_usuario);
+
+    if (mysql_query(conexion, eliminarRelacion.c_str()) != 0)
+    {
+        mysql_query(conexion, "ROLLBACK");
+        return false;
+    }
+
+    // Comprobar si quedan otros usuarios relacionados.
+    string comprobar =
+        "SELECT id_tarea FROM tarea_usuario "
+        "WHERE id_tarea = " + to_string(id_tarea);
+
+    if (mysql_query(conexion, comprobar.c_str()) != 0)
+    {
+        mysql_query(conexion, "ROLLBACK");
+        return false;
+    }
+
+    resultado = mysql_store_result(conexion);
+
+    if (resultado == nullptr)
+    {
+        mysql_query(conexion, "ROLLBACK");
+        return false;
+    }
+
+    bool tieneUsuarios = mysql_num_rows(resultado) > 0;
+
+    mysql_free_result(resultado);
+
+    // Si no quedan usuarios, eliminar definitivamente.
+    if (!tieneUsuarios)
+    {
+        string eliminarTarea =
+            "DELETE FROM tarea WHERE id_tarea = " +
+            to_string(id_tarea);
+
+        if (mysql_query(conexion, eliminarTarea.c_str()) != 0)
+        {
+            mysql_query(conexion, "ROLLBACK");
+            return false;
+        }
+    }
+
+    if (mysql_query(conexion, "COMMIT") != 0)
+    {
+        mysql_query(conexion, "ROLLBACK");
+        return false;
+    }
+
+    cout << "Tarea eliminada correctamente." << endl;
+
+    return true;
+}

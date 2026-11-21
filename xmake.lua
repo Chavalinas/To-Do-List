@@ -2,6 +2,8 @@ set_project("To-do List")
 set_languages("c++20")
 add_rules("mode.debug", "mode.release")
 
+add_includedirs("include")
+
 -- Archivos de logica que usan el programa y las pruebas
 local logica = {
     "Validaciones y Mensajes/Validaciones.cpp",
@@ -26,3 +28,4 @@ target("pruebas")
     set_default(false)
     add_files("Validaciones y Mensajes/Pruebas.cpp")
     add_files(table.unpack(logica))
+
