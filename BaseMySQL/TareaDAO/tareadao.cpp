@@ -33,3 +33,53 @@ static void vincularEntero(
     parametro.buffer_type = MYSQL_TYPE_LONG;
     parametro.buffer = &valor;
 }
+
+// Ejecuta una consulta preparada.
+static bool ejecutarPreparada(
+    MYSQL* conexion,
+    const string& consulta,
+    MYSQL_BIND* parametros,
+    unsigned long cantidad)
+{
+    MYSQL_STMT* stmt = mysql_stmt_init(conexion);
+
+    if (stmt == nullptr)
+    {
+        cerr << "Error al inicializar consulta: "
+             << mysql_error(conexion) << endl;
+        return false;
+    }
+
+    if (mysql_stmt_prepare(
+            stmt, consulta.c_str(),
+            static_cast<unsigned long>(consulta.size())) != 0)
+    {
+        cerr << "Error al preparar consulta: "
+             << mysql_stmt_error(stmt) << endl;
+
+        mysql_stmt_close(stmt);
+        return false;
+    }
+
+    if (cantidad > 0 &&
+        mysql_stmt_bind_param(stmt, parametros) != 0)
+    {
+        cerr << "Error al vincular parametros: "
+             << mysql_stmt_error(stmt) << endl;
+
+        mysql_stmt_close(stmt);
+        return false;
+    }
+
+    if (mysql_stmt_execute(stmt) != 0)
+    {
+        cerr << "Error al ejecutar consulta: "
+             << mysql_stmt_error(stmt) << endl;
+
+        mysql_stmt_close(stmt);
+        return false;
+    }
+
+    mysql_stmt_close(stmt);
+    return true;
+}
